@@ -1,7 +1,7 @@
 // SmartGarden Frontend Configuration
 const config = {
-  // API Configuration
-  API_BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:8000',
+  // API Configuration - Update dengan URL PythonAnywhere
+  API_BASE_URL: process.env.REACT_APP_API_URL || 'https://NelsenDeploy.pythonanywhere.com',
   
   // Auto-refresh interval (in milliseconds)
   REFRESH_INTERVAL: 30000, // 30 seconds
