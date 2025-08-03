@@ -65,7 +65,7 @@ const Temperature = () => {
     const interval = setInterval(fetchCurrentTemperature, config.REFRESH_INTERVAL);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchAllData, fetchCurrentTemperature]);
 
   const formatTimestamp = (timestamp) => {
     return new Date(timestamp).toLocaleString();
