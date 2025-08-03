@@ -98,6 +98,67 @@ curl -X POST "http://localhost:8000/api/temperature/generate-dummy?count=20"
 ### Test Frontend
 
 1. Pastikan API berjalan di port 8000
+
+## 🚀 Deployment ke Vercel
+
+### Prerequisites untuk Deployment
+
+* **GitHub account** (untuk repository)
+* **Vercel account** (gratis di [vercel.com](https://vercel.com))
+* **Node.js 14+** (untuk build)
+
+### Langkah Deployment
+
+1. **Push project ke GitHub:**
+   ```bash
+   git add .
+   git commit -m "Ready for Vercel deployment"
+   git push origin main
+   ```
+
+2. **Deploy ke Vercel:**
+   - Buka [vercel.com](https://vercel.com)
+   - Login dengan GitHub
+   - Klik "New Project"
+   - Import repository SmartGarden
+   - Vercel akan otomatis mendeteksi React app
+   - Klik "Deploy"
+
+3. **Konfigurasi Environment Variables (opsional):**
+   - Di dashboard Vercel, masuk ke project settings
+   - Tambahkan environment variables jika diperlukan
+   - Redeploy jika ada perubahan
+
+4. **Custom Domain (opsional):**
+   - Di project settings Vercel
+   - Tambahkan custom domain jika diperlukan
+
+### File Konfigurasi Vercel
+
+Project sudah dilengkapi dengan:
+- `vercel.json` - Konfigurasi deployment
+- `public/manifest.json` - PWA manifest
+- `.gitignore` yang sudah dioptimasi untuk Vercel
+
+### Build Command
+
+Vercel akan otomatis menjalankan:
+```bash
+npm run build
+```
+
+### Output Directory
+
+Build files akan disimpan di folder `build/` yang sudah tidak di-ignore oleh Git.
+
+## ✅ Status Deployment
+
+- ✅ `.gitignore` sudah dioptimasi untuk Vercel
+- ✅ `public/` folder tidak di-ignore
+- ✅ `build/` folder tidak di-ignore
+- ✅ `vercel.json` sudah dikonfigurasi
+- ✅ `manifest.json` sudah dibuat
+- ✅ Build test berhasil
 2. Pastikan frontend berjalan di port 3000
 3. Buka browser: `http://localhost:3000`
 4. Navigate ke halaman "Temperature" untuk melihat monitoring

@@ -1,5 +1,5 @@
 # ========================================
-# SmartGarden Project - Git Ignore
+# SmartGarden Project - Git Ignore (Vercel Ready)
 # ========================================
 
 # ========================================
@@ -16,9 +16,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -184,7 +182,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
 
 # Snowpack dependency directory
@@ -234,11 +231,9 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
-public
 
 # Vuepress build output
 .vuepress/dist
@@ -367,10 +362,6 @@ $RECYCLE.BIN/
 # Build & Deployment Files
 # ========================================
 
-# React build output
-frontend/build/
-frontend/dist/
-
 # Python build
 *.pyc
 *.pyo
@@ -379,8 +370,6 @@ __pycache__/
 *.so
 
 # Distribution
-dist/
-build/
 *.egg-info/
 
 # ========================================
