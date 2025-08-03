@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import config from '../config';
 import './Temperature.css';
@@ -14,7 +14,7 @@ const Temperature = () => {
   // API base URL from config
   const API_BASE_URL = config.API_BASE_URL;
 
-  const fetchCurrentTemperature = async () => {
+  const fetchCurrentTemperature = useCallback(async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/api/temperature`);
       setCurrentData(response.data);
@@ -24,9 +24,9 @@ const Temperature = () => {
       setError('Failed to fetch current temperature data');
       console.error('Error fetching current temperature:', err);
     }
-  };
+  }, [API_BASE_URL]);
 
-  const fetchTemperatureHistory = async () => {
+  const fetchTemperatureHistory = useCallback(async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/api/temperature/history`);
       setHistoryData(response.data.history || []);
@@ -35,9 +35,9 @@ const Temperature = () => {
       setError('Failed to fetch temperature history');
       console.error('Error fetching temperature history:', err);
     }
-  };
+  }, [API_BASE_URL]);
 
-  const fetchTemperatureStats = async () => {
+  const fetchTemperatureStats = useCallback(async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/api/temperature/stats`);
       setStatsData(response.data);
@@ -46,9 +46,9 @@ const Temperature = () => {
       setError('Failed to fetch temperature statistics');
       console.error('Error fetching temperature stats:', err);
     }
-  };
+  }, [API_BASE_URL]);
 
-  const fetchAllData = async () => {
+  const fetchAllData = useCallback(async () => {
     setLoading(true);
     await Promise.all([
       fetchCurrentTemperature(),
@@ -56,7 +56,7 @@ const Temperature = () => {
       fetchTemperatureStats()
     ]);
     setLoading(false);
-  };
+  }, [fetchCurrentTemperature, fetchTemperatureHistory, fetchTemperatureStats]);
 
   useEffect(() => {
     fetchAllData();
