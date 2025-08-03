@@ -6,100 +6,86 @@ Project SmartGarden adalah aplikasi smart home yang terdiri dari **API backend**
 
 ```
 SmartGarden/
-├── api/                    # Backend API (FastAPI)
+├── api/                    # Backend API (FastAPI/Flask)
 │   ├── app.py             # Aplikasi utama FastAPI
+│   ├── flask_app.py       # Aplikasi Flask (WSGI compatible)
 │   ├── requirements.txt   # Dependencies Python
 │   ├── wsgi.py           # WSGI configuration
 │   └── temperature.db    # Database SQLite
-├── frontend/              # Frontend React
-│   ├── public/
-│   ├── src/
-│   ├── package.json
-│   └── package-lock.json
+├── src/                   # Frontend React (Source)
+├── public/                # Frontend React (Public)
+├── package.json           # Frontend dependencies
+├── vercel.json           # Vercel deployment config
 └── README.md             # File ini
 ```
 
 ## 🚀 Cara Menjalankan Project
 
 ### Prerequisites
-- **Python 3.8+** (untuk backend)
-- **Node.js 14+** (untuk frontend)
-- **npm** atau **yarn** (package manager)
+
+* **Python 3.8+** (untuk backend)
+* **Node.js 14+** (untuk frontend)
+* **npm** atau **yarn** (package manager)
 
 ### Langkah 1: Setup Backend (API)
 
 1. **Buka terminal/command prompt**
-2. **Masuk ke folder api:**
-   ```bash
-   cd api
-   ```
-
-3. **Install dependencies Python:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Jalankan API server:**
-   ```bash
-   uvicorn app:app --reload --host 0.0.0.0 --port 8000
-   ```
-
+2. **Masuk ke folder api:**  
+cd api
+3. **Install dependencies Python:**  
+pip install -r requirements.txt
+4. **Jalankan API server:**  
+uvicorn app:app --reload --host 0.0.0.0 --port 8000
 5. **API akan berjalan di:** `http://localhost:8000`
 6. **Dokumentasi API:** `http://localhost:8000/docs`
 
 ### Langkah 2: Setup Frontend (React)
 
 1. **Buka terminal/command prompt baru**
-2. **Masuk ke folder frontend:**
-   ```bash
-   cd frontend
-   ```
-
-3. **Install dependencies Node.js:**
-   ```bash
-   npm install
-   ```
-
-4. **Jalankan React development server:**
-   ```bash
-   npm start
-   ```
-
+2. **Masuk ke folder root:**  
+cd SmartGarden
+3. **Install dependencies Node.js:**  
+npm install
+4. **Jalankan React development server:**  
+npm start
 5. **Frontend akan berjalan di:** `http://localhost:3000`
 
 ## 📊 Fitur yang Tersedia
 
-### Backend API (FastAPI)
-- ✅ RESTful API untuk data temperature dan humidity
-- ✅ Database SQLite dengan SQLAlchemy
-- ✅ Automatic API documentation (Swagger UI)
-- ✅ Real-time data monitoring
-- ✅ Dummy data generation untuk testing
-- ✅ CORS enabled untuk React frontend
+### Backend API (FastAPI/Flask)
+
+* ✅ RESTful API untuk data temperature dan humidity
+* ✅ Database SQLite dengan SQLAlchemy
+* ✅ Automatic API documentation (Swagger UI)
+* ✅ Real-time data monitoring
+* ✅ Dummy data generation untuk testing
+* ✅ CORS enabled untuk React frontend
+* ✅ WSGI compatible untuk deployment
 
 ### Frontend (React)
-- ✅ Home Page dengan landing page
-- ✅ About Page dengan informasi perusahaan
-- ✅ Contact Page dengan form kontak
-- ✅ Temperature Page dengan real-time monitoring
-- ✅ Responsive design
-- ✅ Auto-refresh data
+
+* ✅ Home Page dengan landing page
+* ✅ About Page dengan informasi perusahaan
+* ✅ Contact Page dengan form kontak
+* ✅ Temperature Page dengan real-time monitoring
+* ✅ Responsive design
+* ✅ Auto-refresh data
 
 ## 🔧 Endpoint API
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/` | Informasi API |
-| GET | `/api/health` | Health check |
-| GET | `/api/temperature` | Data temperature saat ini |
-| GET | `/api/temperature/history` | Riwayat temperature |
-| GET | `/api/temperature/stats` | Statistik temperature |
-| POST | `/api/temperature/generate-dummy` | Generate data dummy |
+| Method | Endpoint                        | Deskripsi                 |
+| ------ | ------------------------------- | ------------------------- |
+| GET    | /                               | Informasi API             |
+| GET    | /api/health                     | Health check              |
+| GET    | /api/temperature                | Data temperature saat ini |
+| GET    | /api/temperature/history        | Riwayat temperature       |
+| GET    | /api/temperature/stats          | Statistik temperature     |
+| POST   | /api/temperature/generate-dummy | Generate data dummy       |
 
 ## 🧪 Testing
 
 ### Test API
-```bash
+
 # Health check
 curl http://localhost:8000/api/health
 
@@ -108,84 +94,82 @@ curl http://localhost:8000/api/temperature
 
 # Generate dummy data
 curl -X POST "http://localhost:8000/api/temperature/generate-dummy?count=20"
-```
 
 ### Test Frontend
+
 1. Pastikan API berjalan di port 8000
 2. Pastikan frontend berjalan di port 3000
 3. Buka browser: `http://localhost:3000`
 4. Navigate ke halaman "Temperature" untuk melihat monitoring
 
-## ��️ Troubleshooting
+##️ Troubleshooting
 
 ### Masalah Umum
 
-**1. Port sudah digunakan**
-```bash
+**1\. Port sudah digunakan**
+
 # Cek port yang digunakan
 netstat -ano | findstr :8000
 netstat -ano | findstr :3000
 
 # Kill process jika perlu
 taskkill /PID [PID_NUMBER] /F
-```
 
-**2. Dependencies tidak terinstall**
-```bash
+**2\. Dependencies tidak terinstall**
+
 # Backend
 cd api
 pip install -r requirements.txt
 
 # Frontend
-cd frontend
 npm install
-```
 
-**3. Database error**
-```bash
+**3\. Database error**
+
 # Hapus file database dan restart
 cd api
 del temperature.db
 uvicorn app:app --reload --host 0.0.0.0 --port 8000
-```
 
-**4. CORS error di frontend**
-- Pastikan API berjalan di `http://localhost:8000`
-- Cek file `frontend/src/config.js` untuk URL API
+**4\. CORS error di frontend**
+
+* Pastikan API berjalan di `http://localhost:8000`
+* Cek file `src/config.js` untuk URL API
 
 ### Error Messages
 
 **"Module not found"**
-- Jalankan `npm install` di folder frontend
-- Jalankan `pip install -r requirements.txt` di folder api
+
+* Jalankan `npm install` di folder root
+* Jalankan `pip install -r requirements.txt` di folder api
 
 **"Address already in use"**
-- Cek apakah ada aplikasi lain yang menggunakan port 8000 atau 3000
-- Gunakan port berbeda: `uvicorn app:app --reload --host 0.0.0.0 --port 8001`
+
+* Cek apakah ada aplikasi lain yang menggunakan port 8000 atau 3000
+* Gunakan port berbeda: `uvicorn app:app --reload --host 0.0.0.0 --port 8001`
 
 **"Database locked"**
-- Tutup semua aplikasi yang mengakses database
-- Restart API server
+
+* Tutup semua aplikasi yang mengakses database
+* Restart API server
 
 ## 📱 Cara Menggunakan Aplikasi
 
 1. **Buka browser** dan kunjungi `http://localhost:3000`
-2. **Navigasi menu:**
-   - **Home**: Halaman utama
-   - **About**: Informasi tentang SmartGarden
-   - **Contact**: Form kontak
-   - **Temperature**: Monitoring temperature real-time
-
-3. **Di halaman Temperature:**
-   - Lihat data temperature dan humidity saat ini
-   - Lihat grafik riwayat data
-   - Data akan auto-refresh setiap 5 detik
+2. **Navigasi menu:**  
+   * **Home**: Halaman utama  
+   * **About**: Informasi tentang SmartGarden  
+   * **Contact**: Form kontak  
+   * **Temperature**: Monitoring temperature real-time
+3. **Di halaman Temperature:**  
+   * Lihat data temperature dan humidity saat ini  
+   * Lihat grafik riwayat data  
+   * Data akan auto-refresh setiap 5 detik
 
 ## 🔄 Auto-Start Script (Windows)
 
 Buat file `start.bat` di root folder:
 
-```batch
 @echo off
 echo Starting SmartGarden Project...
 echo.
@@ -197,7 +181,7 @@ echo Waiting 3 seconds...
 timeout /t 3 /nobreak > nul
 
 echo Starting Frontend...
-start "Frontend" cmd /k "cd frontend && npm start"
+start "Frontend" cmd /k "npm start"
 
 echo.
 echo SmartGarden is starting...
@@ -205,31 +189,34 @@ echo API: http://localhost:8000
 echo Frontend: http://localhost:3000
 echo.
 pause
-```
 
 ## 🛠️ Technologies
 
 ### Backend
-- **Python 3.8+**
-- **FastAPI** - Modern web framework
-- **SQLAlchemy** - Database ORM
-- **Pydantic** - Data validation
-- **Uvicorn** - ASGI server
-- **SQLite** - Database
+
+* **Python 3.8+**
+* **FastAPI** \- Modern web framework
+* **Flask** \- WSGI compatible framework
+* **SQLAlchemy** \- Database ORM
+* **Pydantic** \- Data validation
+* **Uvicorn** \- ASGI server
+* **SQLite** \- Database
 
 ### Frontend
-- **React 18**
-- **JavaScript (ES6+)**
-- **CSS3** - Styling
-- **Axios** - HTTP client
-- **React Router** - Navigation
+
+* **React 18**
+* **JavaScript (ES6+)**
+* **CSS3** \- Styling
+* **Axios** \- HTTP client
+* **React Router** \- Navigation
 
 ## 📝 Notes
 
-- **Database**: SQLite file akan dibuat otomatis saat pertama kali menjalankan API
-- **Dummy Data**: 10 record dummy akan dibuat otomatis saat startup
-- **Auto-refresh**: Frontend akan refresh data setiap 5 detik
-- **CORS**: Backend sudah dikonfigurasi untuk menerima request dari frontend
+* **Database**: SQLite file akan dibuat otomatis saat pertama kali menjalankan API
+* **Dummy Data**: 10 record dummy akan dibuat otomatis saat startup
+* **Auto-refresh**: Frontend akan refresh data setiap 30 detik
+* **CORS**: Backend sudah dikonfigurasi untuk menerima request dari frontend
+* **Deployment**: Backend di PythonAnywhere, Frontend di Vercel
 
 ## 🤝 Support
 
